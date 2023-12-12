@@ -1,0 +1,8 @@
+{
+  "goerli": {
+    "GovernorCompTestnet": {
+      "address": "0xbEF87C8665F2F7C413b9781EFC5b7f1852B68D2e",
+      "startBlock": 10094757
+    }
+  }
+}
