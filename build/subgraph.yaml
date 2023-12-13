@@ -6,7 +6,6 @@ dataSources:
     name: GovernorCompTestnet
     network: goerli
     source:
-      address: "0xbEF87C8665F2F7C413b9781EFC5b7f1852B68D2e"
       abi: GovernorCompTestnet
       startBlock: 10094757
     mapping:
