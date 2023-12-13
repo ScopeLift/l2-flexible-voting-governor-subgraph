@@ -37,7 +37,6 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
   entity.proposalId = event.params.proposalId
   entity.proposer = event.params.proposer
 	// Weird type issue
-  // entity.targets = event.params.targets
   entity.values = event.params.values
   entity.signatures = event.params.signatures
   entity.calldatas = event.params.calldatas

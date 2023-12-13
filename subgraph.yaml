@@ -40,3 +40,41 @@ dataSources:
         - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
           handler: handleVoteCastWithParams
       file: ./src/governor-comp-testnet.ts
+  - kind: ethereum
+    name: Contract
+    network: goerli
+    source:
+      address: "0xDB4e3F34bb3eba8FD3FcFAbC89E58CF4005AF367"
+      abi: Contract
+      startBlock: 10094651
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ContractProposalCanceled
+        - ContractProposalCreated
+        - ContractProposalExecuted
+        - ContractProposalQueued
+        - ContractTimelockChange
+        - ContractVoteCast
+        - ContractVoteCastWithParams
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: ProposalQueued(uint256,uint256)
+          handler: handleProposalQueued
+        - event: TimelockChange(address,address)
+          handler: handleTimelockChange
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+        - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
+          handler: handleVoteCastWithParams
+      file: ./src/contract.ts
