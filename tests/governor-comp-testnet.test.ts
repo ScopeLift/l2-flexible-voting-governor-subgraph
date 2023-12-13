@@ -6,9 +6,7 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { BigInt, Address, Bytes } from "@graphprotocol/graph-ts"
-import { ProposalCanceled } from "../generated/schema"
-import { ProposalCanceled as ProposalCanceledEvent } from "../generated/GovernorCompTestnet/GovernorCompTestnet"
+import { BigInt, } from "@graphprotocol/graph-ts"
 import { handleProposalCanceled } from "../src/governor-comp-testnet"
 import { createProposalCanceledEvent } from "./governor-comp-testnet-utils"
 

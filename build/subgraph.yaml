@@ -29,14 +29,4 @@ dataSources:
           handler: handleProposalCanceled
         - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
           handler: handleProposalCreated
-        - event: ProposalExecuted(uint256)
-          handler: handleProposalExecuted
-        - event: ProposalQueued(uint256,uint256)
-          handler: handleProposalQueued
-        - event: TimelockChange(address,address)
-          handler: handleTimelockChange
-        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
-          handler: handleVoteCast
-        - event: VoteCastWithParams(indexed address,uint256,uint8,uint256,string,bytes)
-          handler: handleVoteCastWithParams
       file: GovernorCompTestnet/GovernorCompTestnet.wasm
