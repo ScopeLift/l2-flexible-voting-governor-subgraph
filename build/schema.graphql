@@ -4,13 +4,13 @@ type ProposalCanceled @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  contract: Bytes!
 }
 
 type ProposalCreated @entity(immutable: true) {
   id: Bytes!
   proposalId: BigInt! # uint256
   proposer: Bytes! # address
-  targets: [Bytes!]! # address[]
   values: [BigInt!]! # uint256[]
   signatures: [String!]! # string[]
   calldatas: [Bytes!]! # bytes[]
@@ -20,4 +20,5 @@ type ProposalCreated @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   transactionHash: Bytes!
+  contract: Bytes!
 }

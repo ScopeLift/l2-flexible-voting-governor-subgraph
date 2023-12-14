@@ -105,6 +105,19 @@ export class ProposalCanceled extends Entity {
   set transactionHash(value: Bytes) {
     this.set("transactionHash", Value.fromBytes(value));
   }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
+  }
 }
 
 export class ProposalCreated extends Entity {
@@ -174,19 +187,6 @@ export class ProposalCreated extends Entity {
 
   set proposer(value: Bytes) {
     this.set("proposer", Value.fromBytes(value));
-  }
-
-  get targets(): Array<Bytes> {
-    let value = this.get("targets");
-    if (!value || value.kind == ValueKind.NULL) {
-      throw new Error("Cannot return null for a required field.");
-    } else {
-      return value.toBytesArray();
-    }
-  }
-
-  set targets(value: Array<Bytes>) {
-    this.set("targets", Value.fromBytesArray(value));
   }
 
   get values(): Array<BigInt> {
@@ -304,5 +304,18 @@ export class ProposalCreated extends Entity {
 
   set transactionHash(value: Bytes) {
     this.set("transactionHash", Value.fromBytes(value));
+  }
+
+  get contract(): Bytes {
+    let value = this.get("contract");
+    if (!value || value.kind == ValueKind.NULL) {
+      throw new Error("Cannot return null for a required field.");
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set contract(value: Bytes) {
+    this.set("contract", Value.fromBytes(value));
   }
 }
