@@ -7,7 +7,7 @@ import {
   Entity,
   Bytes,
   Address,
-  BigInt
+  BigInt,
 } from "@graphprotocol/graph-ts";
 
 export class ProposalCanceled extends ethereum.Event {
@@ -313,7 +313,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
   castVote(proposalId: BigInt, support: i32): BigInt {
     let result = super.call("castVote", "castVote(uint256,uint8):(uint256)", [
       ethereum.Value.fromUnsignedBigInt(proposalId),
-      ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support))
+      ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
     ]);
 
     return result[0].toBigInt();
@@ -325,7 +325,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       "castVote(uint256,uint8):(uint256)",
       [
         ethereum.Value.fromUnsignedBigInt(proposalId),
-        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support))
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
       ]
     );
     if (result.reverted) {
@@ -350,7 +350,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
-        ethereum.Value.fromFixedBytes(s)
+        ethereum.Value.fromFixedBytes(s),
       ]
     );
 
@@ -372,7 +372,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
-        ethereum.Value.fromFixedBytes(s)
+        ethereum.Value.fromFixedBytes(s),
       ]
     );
     if (result.reverted) {
@@ -389,7 +389,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(proposalId),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
-        ethereum.Value.fromString(reason)
+        ethereum.Value.fromString(reason),
       ]
     );
 
@@ -407,7 +407,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       [
         ethereum.Value.fromUnsignedBigInt(proposalId),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
-        ethereum.Value.fromString(reason)
+        ethereum.Value.fromString(reason),
       ]
     );
     if (result.reverted) {
@@ -430,7 +430,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(proposalId),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
         ethereum.Value.fromString(reason),
-        ethereum.Value.fromBytes(params)
+        ethereum.Value.fromBytes(params),
       ]
     );
 
@@ -450,7 +450,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(proposalId),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)),
         ethereum.Value.fromString(reason),
-        ethereum.Value.fromBytes(params)
+        ethereum.Value.fromBytes(params),
       ]
     );
     if (result.reverted) {
@@ -479,7 +479,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromBytes(params),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
-        ethereum.Value.fromFixedBytes(s)
+        ethereum.Value.fromFixedBytes(s),
       ]
     );
 
@@ -505,7 +505,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromBytes(params),
         ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(v)),
         ethereum.Value.fromFixedBytes(r),
-        ethereum.Value.fromFixedBytes(s)
+        ethereum.Value.fromFixedBytes(s),
       ]
     );
     if (result.reverted) {
@@ -541,7 +541,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
   getVotes(account: Address, blockNumber: BigInt): BigInt {
     let result = super.call("getVotes", "getVotes(address,uint256):(uint256)", [
       ethereum.Value.fromAddress(account),
-      ethereum.Value.fromUnsignedBigInt(blockNumber)
+      ethereum.Value.fromUnsignedBigInt(blockNumber),
     ]);
 
     return result[0].toBigInt();
@@ -556,7 +556,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       "getVotes(address,uint256):(uint256)",
       [
         ethereum.Value.fromAddress(account),
-        ethereum.Value.fromUnsignedBigInt(blockNumber)
+        ethereum.Value.fromUnsignedBigInt(blockNumber),
       ]
     );
     if (result.reverted) {
@@ -577,7 +577,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(account),
         ethereum.Value.fromUnsignedBigInt(blockNumber),
-        ethereum.Value.fromBytes(params)
+        ethereum.Value.fromBytes(params),
       ]
     );
 
@@ -595,7 +595,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       [
         ethereum.Value.fromAddress(account),
         ethereum.Value.fromUnsignedBigInt(blockNumber),
-        ethereum.Value.fromBytes(params)
+        ethereum.Value.fromBytes(params),
       ]
     );
     if (result.reverted) {
@@ -608,7 +608,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
   hasVoted(proposalId: BigInt, account: Address): boolean {
     let result = super.call("hasVoted", "hasVoted(uint256,address):(bool)", [
       ethereum.Value.fromUnsignedBigInt(proposalId),
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
 
     return result[0].toBoolean();
@@ -620,7 +620,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
   ): ethereum.CallResult<boolean> {
     let result = super.tryCall("hasVoted", "hasVoted(uint256,address):(bool)", [
       ethereum.Value.fromUnsignedBigInt(proposalId),
-      ethereum.Value.fromAddress(account)
+      ethereum.Value.fromAddress(account),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -642,7 +642,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromFixedBytes(descriptionHash)
+        ethereum.Value.fromFixedBytes(descriptionHash),
       ]
     );
 
@@ -662,7 +662,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromFixedBytes(descriptionHash)
+        ethereum.Value.fromFixedBytes(descriptionHash),
       ]
     );
     if (result.reverted) {
@@ -702,7 +702,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigIntArray(param2),
         ethereum.Value.fromUnsignedBigIntArray(param3),
-        ethereum.Value.fromBytes(param4)
+        ethereum.Value.fromBytes(param4),
       ]
     );
 
@@ -724,7 +724,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigIntArray(param2),
         ethereum.Value.fromUnsignedBigIntArray(param3),
-        ethereum.Value.fromBytes(param4)
+        ethereum.Value.fromBytes(param4),
       ]
     );
     if (result.reverted) {
@@ -749,7 +749,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigInt(param2),
         ethereum.Value.fromUnsignedBigInt(param3),
-        ethereum.Value.fromBytes(param4)
+        ethereum.Value.fromBytes(param4),
       ]
     );
 
@@ -771,7 +771,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigInt(param2),
         ethereum.Value.fromUnsignedBigInt(param3),
-        ethereum.Value.fromBytes(param4)
+        ethereum.Value.fromBytes(param4),
       ]
     );
     if (result.reverted) {
@@ -794,7 +794,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param0),
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigInt(param2),
-        ethereum.Value.fromBytes(param3)
+        ethereum.Value.fromBytes(param3),
       ]
     );
 
@@ -814,7 +814,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddress(param0),
         ethereum.Value.fromAddress(param1),
         ethereum.Value.fromUnsignedBigInt(param2),
-        ethereum.Value.fromBytes(param3)
+        ethereum.Value.fromBytes(param3),
       ]
     );
     if (result.reverted) {
@@ -849,7 +849,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
 
   proposalEta(proposalId: BigInt): BigInt {
     let result = super.call("proposalEta", "proposalEta(uint256):(uint256)", [
-      ethereum.Value.fromUnsignedBigInt(proposalId)
+      ethereum.Value.fromUnsignedBigInt(proposalId),
     ]);
 
     return result[0].toBigInt();
@@ -962,7 +962,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromString(description)
+        ethereum.Value.fromString(description),
       ]
     );
 
@@ -982,7 +982,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromString(description)
+        ethereum.Value.fromString(description),
       ]
     );
     if (result.reverted) {
@@ -1005,7 +1005,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromFixedBytes(descriptionHash)
+        ethereum.Value.fromFixedBytes(descriptionHash),
       ]
     );
 
@@ -1025,7 +1025,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
         ethereum.Value.fromAddressArray(targets),
         ethereum.Value.fromUnsignedBigIntArray(values),
         ethereum.Value.fromBytesArray(calldatas),
-        ethereum.Value.fromFixedBytes(descriptionHash)
+        ethereum.Value.fromFixedBytes(descriptionHash),
       ]
     );
     if (result.reverted) {
@@ -1037,7 +1037,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
 
   quorum(blockNumber: BigInt): BigInt {
     let result = super.call("quorum", "quorum(uint256):(uint256)", [
-      ethereum.Value.fromUnsignedBigInt(blockNumber)
+      ethereum.Value.fromUnsignedBigInt(blockNumber),
     ]);
 
     return result[0].toBigInt();
@@ -1045,7 +1045,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
 
   try_quorum(blockNumber: BigInt): ethereum.CallResult<BigInt> {
     let result = super.tryCall("quorum", "quorum(uint256):(uint256)", [
-      ethereum.Value.fromUnsignedBigInt(blockNumber)
+      ethereum.Value.fromUnsignedBigInt(blockNumber),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1056,7 +1056,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
 
   state(proposalId: BigInt): i32 {
     let result = super.call("state", "state(uint256):(uint8)", [
-      ethereum.Value.fromUnsignedBigInt(proposalId)
+      ethereum.Value.fromUnsignedBigInt(proposalId),
     ]);
 
     return result[0].toI32();
@@ -1064,7 +1064,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
 
   try_state(proposalId: BigInt): ethereum.CallResult<i32> {
     let result = super.tryCall("state", "state(uint256):(uint8)", [
-      ethereum.Value.fromUnsignedBigInt(proposalId)
+      ethereum.Value.fromUnsignedBigInt(proposalId),
     ]);
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1147,7 +1147,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       "voteWeightCast(uint256,address):(uint128)",
       [
         ethereum.Value.fromUnsignedBigInt(proposalId),
-        ethereum.Value.fromAddress(account)
+        ethereum.Value.fromAddress(account),
       ]
     );
 
@@ -1163,7 +1163,7 @@ export class GovernorCompTestnet extends ethereum.SmartContract {
       "voteWeightCast(uint256,address):(uint128)",
       [
         ethereum.Value.fromUnsignedBigInt(proposalId),
-        ethereum.Value.fromAddress(account)
+        ethereum.Value.fromAddress(account),
       ]
     );
     if (result.reverted) {

@@ -1,14 +1,5 @@
-type ProposalCanceled @entity(immutable: true) {
-  id: Bytes!
-  proposalId: BigInt! # uint256
-  blockNumber: BigInt!
-  blockTimestamp: BigInt!
-  transactionHash: Bytes!
-  contract: Bytes!
-}
-
-type ProposalCreated @entity(immutable: true) {
-  id: Bytes!
+type Proposal @entity(immutable: true) {
+  id: ID!
   proposalId: BigInt! # uint256
   proposer: Bytes! # address
   values: [BigInt!]! # uint256[]
@@ -19,6 +10,7 @@ type ProposalCreated @entity(immutable: true) {
   description: String! # string
   blockNumber: BigInt!
   blockTimestamp: BigInt!
+  governorAddress: Bytes!
+  canceled: Boolean!
   transactionHash: Bytes!
-  contract: Bytes!
 }
