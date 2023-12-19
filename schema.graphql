@@ -11,11 +11,11 @@ type Proposal @entity(immutable: true) {
   blockNumber: BigInt!
   blockTimestamp: BigInt!
   governorAddress: Bytes!
-  canceled: Boolean!
+  isCancelled: Boolean!
   transactionHash: Bytes!
 }
 
-type AggregationEntity @entity(immutable: true) {
+type AggregationEntity @entity {
   id: ID!
   proposalCount: Int! # uint256
 }

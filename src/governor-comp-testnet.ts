@@ -19,16 +19,16 @@ export function handleProposalCanceled(event: ProposalCanceledEvent): void {
     `${event.address.toHex()}-${event.params.proposalId}`
   );
   if (entity === null) return;
-  entity.canceled = true;
+  entity.isCancelled = true;
   entity.save();
 }
 
 // Customize so we just have a proposal object
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
   if (!acceptedContract(event)) return;
-	let aggregationEntity = AggregationEntity.load("proposal")
+	let aggregationEntity = AggregationEntity.load(`${event.address.toHex()}-proposal`)
 	if (!aggregationEntity) {
-		aggregationEntity = new AggregationEntity("proposal")
+		aggregationEntity = new AggregationEntity(`${event.address.toHex()}-proposal`)
 	}
   let entity = new Proposal(
     `${event.address.toHex()}-${event.params.proposalId}`
@@ -47,7 +47,7 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
   entity.blockTimestamp = event.block.timestamp;
   entity.transactionHash = event.transaction.hash;
   entity.governorAddress = event.address;
-  entity.canceled = false;
+  entity.isCancelled = false;
 
   entity.save();
 

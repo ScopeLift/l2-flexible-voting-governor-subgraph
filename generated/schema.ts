@@ -193,8 +193,8 @@ export class Proposal extends Entity {
     this.set("governorAddress", Value.fromBytes(value));
   }
 
-  get canceled(): boolean {
-    let value = this.get("canceled");
+  get isCancelled(): boolean {
+    let value = this.get("isCancelled");
     if (!value || value.kind == ValueKind.NULL) {
       return false;
     } else {
@@ -202,8 +202,8 @@ export class Proposal extends Entity {
     }
   }
 
-  set canceled(value: boolean) {
-    this.set("canceled", Value.fromBoolean(value));
+  set isCancelled(value: boolean) {
+    this.set("isCancelled", Value.fromBoolean(value));
   }
 
   get transactionHash(): Bytes {
