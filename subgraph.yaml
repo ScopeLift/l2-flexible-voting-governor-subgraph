@@ -15,11 +15,6 @@ dataSources:
       entities:
         - ProposalCanceled
         - ProposalCreated
-        - ProposalExecuted
-        - ProposalQueued
-        - TimelockChange
-        - VoteCast
-        - VoteCastWithParams
       abis:
         - name: GovernorCompTestnet
           file: ./abis/GovernorCompTestnet.json

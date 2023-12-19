@@ -14,3 +14,8 @@ type Proposal @entity(immutable: true) {
   canceled: Boolean!
   transactionHash: Bytes!
 }
+
+type AggregationEntity @entity(immutable: true) {
+  id: ID!
+  proposalCount: Int! # uint256
+}

@@ -2,7 +2,7 @@ import {
   ProposalCanceled as ProposalCanceledEvent,
   ProposalCreated as ProposalCreatedEvent,
 } from "../generated/GovernorCompTestnet/GovernorCompTestnet";
-import { Proposal } from "../generated/schema";
+import { AggregationEntity, Proposal } from "../generated/schema";
 import { Address, ethereum } from "@graphprotocol/graph-ts";
 
 function acceptedContract(event: ethereum.Event): boolean {
@@ -26,6 +26,10 @@ export function handleProposalCanceled(event: ProposalCanceledEvent): void {
 // Customize so we just have a proposal object
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
   if (!acceptedContract(event)) return;
+	let aggregationEntity = AggregationEntity.load("proposal")
+	if (!aggregationEntity) {
+		aggregationEntity = new AggregationEntity("proposal")
+	}
   let entity = new Proposal(
     `${event.address.toHex()}-${event.params.proposalId}`
   );
@@ -46,4 +50,7 @@ export function handleProposalCreated(event: ProposalCreatedEvent): void {
   entity.canceled = false;
 
   entity.save();
+
+	aggregationEntity.proposalCount = aggregationEntity.proposalCount + 1
+	aggregationEntity.save()
 }
