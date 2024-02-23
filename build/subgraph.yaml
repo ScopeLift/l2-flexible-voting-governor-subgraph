@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: GovernorCompTestnet
@@ -17,10 +17,10 @@ dataSources:
         - ProposalCreated
       abis:
         - name: GovernorCompTestnet
-          file: ./abis/GovernorCompTestnet.json
+          file: GovernorCompTestnet/abis/GovernorCompTestnet.json
       eventHandlers:
         - event: ProposalCanceled(uint256)
           handler: handleProposalCanceled
         - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
           handler: handleProposalCreated
-      file: ./src/governor-comp-testnet.ts
+      file: GovernorCompTestnet/GovernorCompTestnet.wasm

@@ -1,128 +1,56 @@
 import {
   ProposalCanceled as ProposalCanceledEvent,
   ProposalCreated as ProposalCreatedEvent,
-  ProposalExecuted as ProposalExecutedEvent,
-  ProposalQueued as ProposalQueuedEvent,
-  TimelockChange as TimelockChangeEvent,
-  VoteCast as VoteCastEvent,
-  VoteCastWithParams as VoteCastWithParamsEvent
-} from "../generated/GovernorCompTestnet/GovernorCompTestnet"
-import {
-  ProposalCanceled,
-  ProposalCreated,
-  ProposalExecuted,
-  ProposalQueued,
-  TimelockChange,
-  VoteCast,
-  VoteCastWithParams
-} from "../generated/schema"
+} from "../generated/GovernorCompTestnet/GovernorCompTestnet";
+import { AggregationEntity, Proposal } from "../generated/schema";
+import { Address, ethereum } from "@graphprotocol/graph-ts";
+
+function acceptedContract(event: ethereum.Event): boolean {
+  return [
+    Address.fromString("0xDB4e3F34bb3eba8FD3FcFAbC89E58CF4005AF367"),
+    Address.fromString("0xbEF87C8665F2F7C413b9781EFC5b7f1852B68D2e"),
+  ].includes(event.address);
+}
+// 0xdb4e3f34bb3eba8fd3fcfabc89e58cf4005af367
 
 export function handleProposalCanceled(event: ProposalCanceledEvent): void {
-  let entity = new ProposalCanceled(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.proposalId = event.params.proposalId
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
+  if (!acceptedContract(event)) return;
+  let entity = Proposal.load(
+    `${event.address.toHex()}-${event.params.proposalId}`
+  );
+  if (entity === null) return;
+  entity.isCancelled = true;
+  entity.save();
 }
 
+// Customize so we just have a proposal object
 export function handleProposalCreated(event: ProposalCreatedEvent): void {
-  let entity = new ProposalCreated(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.proposalId = event.params.proposalId
-  entity.proposer = event.params.proposer
-  entity.targets = event.params.targets
-  entity.values = event.params.values
-  entity.signatures = event.params.signatures
-  entity.calldatas = event.params.calldatas
-  entity.startBlock = event.params.startBlock
-  entity.endBlock = event.params.endBlock
-  entity.description = event.params.description
+  if (!acceptedContract(event)) return;
+	let aggregationEntity = AggregationEntity.load(`${event.address.toHex()}-proposal`)
+	if (!aggregationEntity) {
+		aggregationEntity = new AggregationEntity(`${event.address.toHex()}-proposal`)
+	}
+  let entity = new Proposal(
+    `${event.address.toHex()}-${event.params.proposalId}`
+  );
+  entity.proposalId = event.params.proposalId;
+  entity.proposer = event.params.proposer;
+  // Weird type issue
+  entity.values = event.params.values;
+  entity.signatures = event.params.signatures;
+  entity.calldatas = event.params.calldatas;
+  entity.startBlock = event.params.startBlock;
+  entity.endBlock = event.params.endBlock;
+  entity.description = event.params.description;
 
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
+  entity.blockNumber = event.block.number;
+  entity.blockTimestamp = event.block.timestamp;
+  entity.transactionHash = event.transaction.hash;
+  entity.governorAddress = event.address;
+  entity.isCancelled = false;
 
-  entity.save()
-}
+  entity.save();
 
-export function handleProposalExecuted(event: ProposalExecutedEvent): void {
-  let entity = new ProposalExecuted(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.proposalId = event.params.proposalId
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleProposalQueued(event: ProposalQueuedEvent): void {
-  let entity = new ProposalQueued(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.proposalId = event.params.proposalId
-  entity.eta = event.params.eta
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleTimelockChange(event: TimelockChangeEvent): void {
-  let entity = new TimelockChange(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.oldTimelock = event.params.oldTimelock
-  entity.newTimelock = event.params.newTimelock
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleVoteCast(event: VoteCastEvent): void {
-  let entity = new VoteCast(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.voter = event.params.voter
-  entity.proposalId = event.params.proposalId
-  entity.support = event.params.support
-  entity.weight = event.params.weight
-  entity.reason = event.params.reason
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
-}
-
-export function handleVoteCastWithParams(event: VoteCastWithParamsEvent): void {
-  let entity = new VoteCastWithParams(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  )
-  entity.voter = event.params.voter
-  entity.proposalId = event.params.proposalId
-  entity.support = event.params.support
-  entity.weight = event.params.weight
-  entity.reason = event.params.reason
-  entity.params = event.params.params
-
-  entity.blockNumber = event.block.number
-  entity.blockTimestamp = event.block.timestamp
-  entity.transactionHash = event.transaction.hash
-
-  entity.save()
+	aggregationEntity.proposalCount = aggregationEntity.proposalCount + 1
+	aggregationEntity.save()
 }
