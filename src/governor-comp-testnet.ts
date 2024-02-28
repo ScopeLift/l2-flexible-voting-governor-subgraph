@@ -7,8 +7,8 @@ import { Address, ethereum } from "@graphprotocol/graph-ts";
 
 function acceptedContract(event: ethereum.Event): boolean {
   return [
-    Address.fromString("0xDB4e3F34bb3eba8FD3FcFAbC89E58CF4005AF367"),
-    Address.fromString("0xbEF87C8665F2F7C413b9781EFC5b7f1852B68D2e"),
+    Address.fromString("0x6254c468849548Cf79898347AA4db0c046F10a86"),
+    Address.fromString("0x13F7dCcBFa3E17c9063eCFF7299BfbCB738E6AF8"),
   ].includes(event.address);
 }
 // 0xdb4e3f34bb3eba8fd3fcfabc89e58cf4005af367
