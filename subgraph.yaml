@@ -4,10 +4,10 @@ schema:
 dataSources:
   - kind: ethereum
     name: GovernorCompTestnet
-    network: goerli
+    network: sepolia
     source:
       abi: GovernorCompTestnet
-      startBlock: 10094757
+      startBlock: 5361890
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
